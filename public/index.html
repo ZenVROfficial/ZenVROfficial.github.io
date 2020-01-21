@@ -1,0 +1,179 @@
+<html>
+    <head>
+   
+        <script src="/js/aframe.min.js"></script>
+        <script src="/js/spherical-env-map.js"></script>
+        <script src="/js/aframe-extras.js"></script>
+        <script src="/js/aframe-extras.min.js"></script>
+        <script src= "/js/a-ocean.js"></script>
+        <script src= "/js/switch-environment.js"></script>
+        <script src= "/js/glow.js"></script>
+        <script src = "/js/orb.js"></script>
+      
+        
+
+
+
+    </head>
+    <body>
+
+        <a-scene fog="type: exponential; color: #ffe9d3; density: 0.0015;"  shadow="type:basic;" id="PeaceRoom">
+                <a-assets timeout="3000">
+                    <!-- loading in assets to be cached-->  
+                    <!--textures -->
+                
+                   
+                    <img crossorigin="anonymous" id="skymapPR" src="/assets/Textures/PeaceRoom/peaceroomSky.jpg">
+                    <img id = "templeTXT" src="/assets/Textures/PeaceRoom/templeTxt2.png">
+                    <img id = "cTreeTXT" src="/assets/Textures/PeaceRoom/ctree_pr2.png">
+                    <img id = "bushTreesTXT" src="/assets/Textures/PeaceRoom/bushtrees_color.png">
+                    <img id = "mainTreeTXT" src="/assets/Textures/PeaceRoom/tree_main.png">
+                    <img id = "bonsaiTXT" src="/assets/Textures/PeaceRoom/bonsai.png">
+                    <img id = "thiccTreeTXT" src="/assets/Textures/PeaceRoom/tree_pr2.png">
+                    <img id = "skinnyTreeTXT" src="/assets/Textures/PeaceRoom/tree_pr1.png">
+
+
+
+
+                    <!--Sounds-->
+                    <a-asset-item crossorigin="anonymous" id="zenRoomSound" src="/assets/Sounds/ZenRoom/zenRoom.mp3" response-type="arraybuffer"></a-asset-item>
+                    <a-asset-item crossorigin="anonymous" id="waterSound" src="/assets/Sounds/ZenRoom/water.mp3" response-type="arraybuffer"></a-asset-item>
+                    
+
+                    <!--assets-->
+                    <a-asset-item id="bushTreePR" src="/assets/PeaceRoom Models/bushTrees.obj"></a-asset-item>
+                    <a-asset-item id="tree2" src="/assets/PeaceRoom Models/tree_pr2.obj"></a-asset-item>
+                    <a-asset-item id="tree3" src="/assets/PeaceRoom Models/tree_pr1.obj"></a-asset-item>
+                    <a-asset-item id="treeM" src="/assets/PeaceRoom Models/tree_main.obj"></a-asset-item>
+                    <a-asset-item id="entGatePR" src="/assets/PeaceRoom Models/entranceGate.obj"></a-asset-item>
+                    <a-asset-item id="pond" src="/assets/PeaceRoom Models/gardenRiver.obj"></a-asset-item>
+                    <a-asset-item id="templePR" src="/assets/PeaceRoom Models/Temple.obj"></a-asset-item>
+                    <a-asset-item id="LRocksPR" src="/assets/PeaceRoom Models/largeRocks.obj"></a-asset-item>
+                    <a-asset-item id="planePR" src="/assets/PeaceRoom Models/groundtemp.obj"></a-asset-item>
+                    <a-asset-item id="treeFence" src="/assets/PeaceRoom Models/fence.obj"></a-asset-item>
+                    <a-asset-item id="bridge" src="/assets/PeaceRoom Models/bridge.obj"></a-asset-item>
+                    <a-asset-item id="rockPath1" src="/assets/PeaceRoom Models/rockpath1.obj"></a-asset-item>
+                    <a-asset-item id="flatRock" src="/assets/PeaceRoom Models/flatRock.obj"></a-asset-item>
+                    <a-asset-item id="decor" src="/assets/PeaceRoom Models/decor.obj"></a-asset-item>
+                    <a-asset-item id="bench" src="/assets/PeaceRoom Models/bench.obj"></a-asset-item>
+                    <a-asset-item id="rockPath2" src="/assets/PeaceRoom Models/rockpath2.obj"></a-asset-item>
+                    <a-asset-item id="bonsai" src="/assets/PeaceRoom Models/bonsai.obj"></a-asset-item>
+                    <a-asset-item id="bushes" src="/assets/PeaceRoom Models/bushes.obj"></a-asset-item>
+                    <a-asset-item id="bush" src="/assets/PeaceRoom Models/bush.obj"></a-asset-item>
+                    <a-asset-item id="cherryTree" src="/assets/PeaceRoom Models/ctree_pr2.obj"></a-asset-item>
+
+
+                </a-assets>
+                <!-- <a-entity id= "leftHand"laser-controls="hand: left" line="color: red; opacity: 0.75" collider-check></a-entity>
+                <a-entity id="rightHand" laser-controls="hand: right" line="color: red; opacity: 0.75" collider-check></a-entity>
+                <a-entity raycaster="objects: .clickable" cursor></a-entity> -->
+                <!--camera stuff-->
+                <a-entity position="9.4 1.6 -2.7 "camera look-controls wasd-controls>
+                     <a-entity  
+                     cursor="fuse:true; fuseTimeout:500;"
+                     rayOrigin:mouse;
+                     position="0 0 -1"
+                     geometry="primitive:ring; radiusInner:0.015; radiusOuter:0.02;"
+                     material="shader:flat; color:white;" >
+                    </a-entity>
+
+                </a-entity>
+<a-entity position = "0 -1.5">
+                    <!--lights-->
+                    <a-entity light="type:directional; castShadow:true; intensity:0.3; shadowBias:-0.00001; shadowMapWidth:1024; shadowMapHeight:1024; color:#F5D0A0" position="-23 28 -50"></a-entity>
+                    <a-entity light="type:ambient; intensity:0.7; color:#F5D0A0;"></a-entity>
+
+                    <!--stuff loading-->
+                    
+                    <!--Trees-->
+                    
+                  <!--   <a-entity id="treeFenceOBJ" obj-model="#treeFence" material="color:#ffbf66; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" position="25 0 5" scale="0.6 0.6 0.6" shadow="cast:true; receive:true;" "></a-entity>
+ -->
+
+
+                    <a-entity id="treeFenceObj" obj-model="obj:#treeFence;" position="25 0 5" rotation = "0 -80 0" scale="0.025 0.025 0.025" material="color:#b29f8d; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+
+
+                    <a-entity id="bushTree" obj-model="obj:#bushTreePR;" position="-24 0 2" rotation = "0 -80 0" scale="1.0 1.0 1.0" material="color:#fff; src: #bushTreesTXT; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="bushTree2" obj-model="obj:#bushTreePR;" position="-4 -0.46 11.813" rotation = "0 -34 0" scale="1.0 1.0 1.0" material="color:#fff; src: #bushTreesTXT; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+
+                    <a-entity id="cherry" obj-model="obj:#cherryTree;" position="-13 0 5.5" rotation = "0 -25 0" scale="1 1 1" material="color:#fff; src: #cTreeTXT;sphericalEnvMap:#skymapPR; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="tree3" obj-model="obj:#tree3;" position="20 0 -14" rotation = "0 92 0" scale="1.5 1.5 1.5" material="color:#fff; src:#skinnyTreeTXT; sphericalEnvMap:#skymapPR; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="tree2" obj-model="obj:#tree2;" position="-25 0 -12" rotation = "0 -113 0" scale="1.1 1.1 1.1" material="color:#fff; src:#thiccTreeTXT; sphericalEnvMap:#skymapPR; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="treeM" obj-model="obj:#treeM;" position="25 0 5" rotation = "0 -10 0" scale="1 1 1" material="color:#fff; src: #mainTreeTXT;sphericalEnvMap:#skymapPR; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="bonsai" obj-model="obj:#bonsai;" position="-1 -0.3 -5.5" rotation = "0 0 0" scale="15 15 15" material="color:#fff; src:#bonsaiTXT; sphericalEnvMap:#skymapPR; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <!--rock-->
+
+                    <a-entity id="LRocks" obj-model="obj:#LRocksPR;" position="-21.972 0 -2.387" rotation = "0 -63.318 0" scale="2.5 2.5 2.5" material="color:#C1C7C0; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="LRocks2" obj-model="obj:#LRocksPR;" position="20 0 12" rotation = "0 110 0" scale="3 3 3" material="color:#C1C7C0; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="flatRock" obj-model="obj:#flatRock;" position="-14 0 -7" rotation = "0 139 0" scale="2.5 2 1.8" material="color:#C1C7C0; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="flatRock1" obj-model="obj:#flatRock;" position="-1 -0.3 -5.5" rotation = "180 0 0" scale="3.2 2.1 2.7" material="color:#C1C7C0; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+
+
+                    
+                    <!--accessory-->
+                    <a-sphere
+                     glow="enabled:true; scale:1.5; color: #ffdb9b;" 
+                     menu-orb id="orb" 
+                     position="-0.2 4.5 -18.5" 
+                     rotation = "0 0 0" 
+                     scale="0.6 0.6 0.6"
+                     material="color:#fcd897; transparent: true; opacity: 0.8; sphericalEnvMap:#skymapPR; roughness:0.7; metalness:0.2;" 
+                     shadow="cast:true; receive:true;">
+                        <a-animation attribute= "scale"
+                            dur = "4000"
+                            from= "0.8 0.8 0.8"
+                            to= " 0.9 0.9 0.9"
+                            direction='alternate'
+                            easing= "ease-in-out-sine"
+                            repeat= "loop:true">
+                         </a-animation>  
+                    </a-sphere>
+
+                    <!-- sound="src: #zenRoomSound; autoplay:true; loop:true;" -->
+                    <a-entity id="gate" obj-model="obj:#entGatePR;" position="-16 0 -12" rotation = "0 65 0" scale="1.0 1.0 1.0" material="color:#CA9B54; sphericalEnvMap:#skymapPR; roughness:0.7; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="plane" obj-model="obj:#planePR;" position="0 -1.5 4.5" scale="1.0 1.0 1.0" material="color:#AFE1A8; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" sound="src: #zenRoomSound; autoplay:true; loop:true;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="temple" obj-model="obj:#templePR;" position="0 0 -25" scale="1.0 1.0 1.0" material="color:#fff; src:#templeTXT; sphericalEnvMap:#skymapPR; roughness:0.9; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="bridge" obj-model="obj:#bridge;" position="3.3 -0.2 8" rotation = "0 8 0" scale="2.8 2.9 4.1" material="color:#D5C09A; sphericalEnvMap:#skymapPR; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="rockPath1" obj-model="obj:#rockPath1;" position="-13 -0.22 -12.5" rotation = "0 -129 0" scale="1.9 1 2.9" material="color:#C1C7C0; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="decor" obj-model="obj:#decor;" position="-14 0 -7.5" rotation = "0 139 0" scale="1 1 1" material="color:#f4edd9; sphericalEnvMap:#skymapPR; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="bench" obj-model="obj:#bench;" position="18 0 4" rotation = "0 -10 0" scale="0.8 0.8 0.8" material="color:#; sphericalEnvMap:#skymapPR; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="rockPath2" obj-model="obj:#rockPath2;" position="11 -0.19 -7.3" rotation = "0 -47 0" scale="1.2 0.8 1.7" material="color:#C1C7C0; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="bushes" obj-model="obj:#bushes;" position="-27 0 -9.8" rotation = "0 60 0" scale="1.6 1.3 1.3" material="color:#97bf9d; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                    <a-entity id="bush" obj-model="obj:#bush;" position="20 0 -12" rotation = "0 105 0" scale="1.5 1.5 1.5" material="color:#97bf9d; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+
+
+                  <a-entity id= "waterAudio" geometry="primitive: box" material="visible:false;"scale="40.15 2.106 10 " position="-1.955 -1.1 6.567" rotation="0 -16.3 0"  sound="src:#waterSound; autoplay:true; loop:true; maxDistance: 100; rolloffFactor: 20; volume:100;" ></a-entity>
+
+
+                    <a-ocean 
+
+                        id="gardenPond"
+                        scale="1 1.361 1"
+                        position="-1.955 -1.1 6.567"
+                        rotation="-90.000 72.778"
+                        color = "#ade2fa"
+                        width = "15"
+                        density="5" 
+                        depth = "40"
+                  
+                        >
+                    </a-ocean>
+                </a-entity>
+             
+                    <!--<a-entity id="plane" geometry="primitive:plane; width:50; height:40;" position="0 0 -4" rotation="-90 0 0" 
+                    shadow="receive:true;" material="color:#7BC8A4; sphericalEnvMap:#skymapPR; roughness:0.5; metalness:0.0;"></a-entity> -->
+            
+                    <!-- loading in the sky-->
+
+                    <a-entity id="sky" 
+                        geometry = "primitive:sphere; radius: 500;"
+                        material="shader:flat; src:#skymapPR; side:back; height:2048; width:2048" >
+                        
+                    </a-entity>
+                
+        </a-scene>
+      
+        
+    </body>
+</html>

@@ -1,0 +1,199 @@
+<html>
+    <head>
+   
+        <script src="/js/aframe.min.js"></script>
+        <script src="/js/spherical-env-map.js"></script>
+        <script src="/js/aframe-extras.js"></script>
+        <script src="/js/aframe-extras.min.js"></script>
+        <script src= "/js/a-ocean.js"></script>
+        <script src= "/js/switch-environment.js"></script>
+        <script src="/js/aframe-particle-system-component.min.js"></script>
+        <script src= "/js/glow.js"></script>
+        <script src = "/js/orb.js"></script>
+        
+
+
+
+
+    </head>
+    <body>
+
+        <a-scene shadow="type:basic;" id="AngerRoom" >
+                <a-assets timeout="3000">
+                  
+                    <!--textures -->
+                
+                   
+                    <img crossorigin="anonymous" id="skymapPR" src="/assets/Textures/AngerRoom/SkyAR.png">
+                    <img id="mountainRoomTXT" src="/assets/Textures/AngerRoom/MountainRoom.png">
+                    <img id="flameTXT" src="/assets/Textures/AngerRoom/fire.png">
+                    <img id="woodTXT" src="/assets/Textures/AngerRoom/camp.png">
+                  
+
+
+
+
+                    <!--models-->
+                    <a-asset-item id="mountainRoom" src="/assets/AngerRoom Models/mountainRoom.obj"></a-asset-item>
+                    <a-asset-item id="fire" src="/assets/AngerRoom Models/fire.obj"></a-asset-item>
+                    <a-asset-item id="wood" src="/assets/AngerRoom Models/camp.obj"></a-asset-item>
+
+
+                    <a-asset-item id="cloud1" src="/assets/AngerRoom Models/Cloud1.obj"></a-asset-item>
+                    <a-asset-item id="cloud2" src="/assets/AngerRoom Models/Cloud2.obj"></a-asset-item>
+                    <a-asset-item id="cloud3" src="/assets/AngerRoom Models/Cloud3.obj"></a-asset-item>
+                    <a-asset-item id="cloud4" src="/assets/AngerRoom Models/Cloud4.obj"></a-asset-item>
+
+
+                    <!--sounds-->
+                    <a-asset-item crossorigin="anonymous" id="campFireSound" src="/assets/Sounds/ElevationRoom/Campfire.mp3" response-type="arraybuffer"></a-asset-item>
+                    <a-asset-item crossorigin="anonymous" id="cricketsSound" src="/assets/Sounds/ElevationRoom/Crickets.mp3" response-type="arraybuffer"></a-asset-item>
+                    <a-asset-item crossorigin="anonymous" id="ElevationSound" src="/assets/Sounds/ElevationRoom/Dreaming.mp3" response-type="arraybuffer"></a-asset-item>
+                    <a-asset-item crossorigin="anonymous" id="WaterSound" src="/assets/Sounds/SolaceRoom/oceanSounds.mp3" response-type="arraybuffer"></a-asset-item>
+                  
+
+
+
+                </a-assets>
+                <!-- <a-entity id= "leftHand"laser-controls="hand: left" line="color: red; opacity: 0.75" collider-check></a-entity>
+                <a-entity id="rightHand" laser-controls="hand: right" line="color: red; opacity: 0.75" collider-check></a-entity>
+                <a-entity raycaster="objects: .clickable" cursor></a-entity> -->
+                <!--camera stuff-->
+                <a-entity position="-35 1.6 106  "camera look-controls wasd-controls >
+                    <a-entity  
+                    cursor="fuse:true; fuseTimeout:500;"
+                    rayOrigin:mouse;
+                    position="0 0 -1"
+                    geometry="primitive:ring; radiusInner:0.015; radiusOuter:0.02;"
+                    material="shader:flat; color:white;" >
+                   </a-entity>
+
+               </a-entity>
+
+
+               <a-entity position="0 -2.7 0">
+               
+                    <!--lights-->
+                <a-entity light="type:directional; castShadow:true; intensity:0.2; shadowBias:-0.00001; shadowMapWidth:1024; shadowMapHeight:1024;" position="-23 28 -50"></a-entity>
+                <a-entity light="type:ambient; intensity:0.7; color:#adbcd3;"></a-entity>
+
+                    <!--stuff loading-->
+
+
+                   
+
+
+
+                
+
+               <!--Environment-->
+                <a-sphere 
+                     mountain-orb
+                     glow="enabled:true; scale:1.5; color: #ffdb9b;" 
+                     switch-environment id="orb" 
+                     position="-4.74 7.45 11.87" 
+                     rotation = "0 0 0" 
+                     scale="0.6 0.6 0.6"
+                     material="color:#fcd897; transparent: true; opacity: 0.8; sphericalEnvMap:#skymapPR; roughness:0.7; metalness:0.2;" 
+                     shadow="cast:true; receive:true;">
+                        <a-animation attribute= "scale"
+                            dur = "4000"
+                            from= "0.8 0.8 0.8"
+                            to= " 0.9 0.9 0.9"
+                            direction='alternate'
+                            easing= "ease-in-out-sine"
+                            repeat= "loop:true">
+                         </a-animation>  
+                 </a-sphere>
+                 <a-entity id="mountainRoomALL" obj-model="obj:#mountainRoom;" position="0 -1 0" scale="1.0 1.0 1.0" material="color:#fff; src: #mountainRoomTXT; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;" sound="src:#ElevationSound; loop:true; autoplay:true; volume:10;"></a-entity>
+                 
+                 <a-entity id="campFire" obj-model="obj:#wood;" position="-53.3 1.64 80.32" scale="0.8 0.8 0.8" material="color:#fff; src: #woodTXT; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" sound="src: #campFireSound;autoplay:true; loop:true; maxDistance: 100; rolloffFactor: 20; volume:20;"shadow="cast:true; receive:true;"></a-entity>
+                 <a-entity id="flames" obj-model="obj:#fire;" position="-53.3 1.64 80.32" scale="0.8 0.8 0.8" material="color:#fff; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;"  shadow="cast:true; receive:true;">
+                    <a-animation
+                        attribute="material.color"
+                        from ="#f4cb42"
+                        to="#ff996b"
+                        dur="3000"
+                        easing= "ease-in-out-quad"
+                        direction="alternate"
+                        repeat="loop:true"
+                    >
+                    </a-animation>
+
+                    
+                <a-animation
+                attribute="rotation"
+                from ="0 0 0"
+                to="0 360 0"
+                dur="30000"
+                easing= "ease-in-out-quad"
+                direction="alternate"
+                repeat="loop:true"
+            >
+            </a-animation>
+
+
+                   <a-light
+                   type="directional"
+                   intensity = "0.3"
+                   color="#ffc58a"
+                   >
+                    <a-animation
+                    attribute="intensity"
+                    from = "0.3"
+                    to="0.2"
+                    easing = "ease-in-out-quad"
+                    direction="alternate"
+                    repeat="loop:true"
+                    
+                    ></a-animation>
+                   </a-light>
+
+                 </a-entity>
+
+
+
+
+                   <!--WATTEEERRRR-->
+                    <a-ocean 
+                        sound= "src: #WaterSound; loop:true; autoplay:true; maxDistance: 100; rolloffFactor: 20; volume:10;"
+                        id="gardenPond"
+                        scale = "18.36 6.35 5.269"
+                        position="52.71 -1.28 -61.37"
+                        rotation="-90.000 2.845 0"
+                        color = "#ade2fa"
+                        width = "10"
+                        density="10" 
+                        depth = "20"
+                        >
+                    </a-ocean>
+             <!-- CLOUDSSSSSSS-->
+            
+                <a-entity id="cloud1OBJ" obj-model="obj:#cloud1;" rotation = "0 -151 180" position="15.064 98 -145.346" scale="3 3 3" material="color:#fff; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                <a-entity id="cloud2OBJ" obj-model="obj:#cloud2;" rotation = "0 -131 180" position="24 108 -134" scale="4 3 3" material="color:#fff; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                <a-entity id="cloud3OBJ" obj-model="obj:#cloud1;" rotation = "0 -103 180" position="37 95.5 -122" scale="5 3 4" material="color:#fff; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                <a-entity id="cloud4OBJ" obj-model="obj:#cloud3;" rotation = "0 -82 180" position="72 86 -106" scale="3 3 6" material="color:#fff; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                <a-entity id = "snow" particle-system="preset: snow; particleCount: 600; size: 3;" scale="0.5 0.7 1" position= "38 36 -120" rotation- "0 0 -18"></a-entity>
+
+
+
+
+                <!--2nd set of clouds-->
+                <a-entity id="cloud5OBJ" obj-model="obj:#cloud2;" rotation = "0 -130 180" position="128 144.5 -75.9" scale="3 3 3" material="color:#fff; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                <a-entity id="cloud6OBJ" obj-model="obj:#cloud2;" rotation = "0 -154.5 180" position="98 125 -92.8" scale="4 3 3" material="color:#fff; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                <a-entity id="cloud7OBJ" obj-model="obj:#cloud3;" rotation = "0 -136 180" position="100 147 -82" scale="5 3 4" material="color:#fff; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                <a-entity id="cloud8OBJ" obj-model="obj:#cloud4;" rotation = "0 -149 180" position="123 133 -60" scale="5 3 4" material="color:#fff; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                <a-entity id = "snow" particle-system="preset: snow; particleCount: 600; size: 3;" scale="0.5 0.7 1" position= "102 78 -71" rotation- "0 0 -18"></a-entity>
+
+            </a-entity>
+
+                    <!--sky-->
+                    <a-entity id="sky" 
+                        geometry = "primitive:sphere; radius: 500;"
+                        material="shader:flat; src:#skymapPR; side:back; height:2048; width:2048" ></a-entity>
+                
+        </a-scene>
+      
+        
+    </body>
+</html>

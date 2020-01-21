@@ -1,0 +1,115 @@
+<html>
+    <head>
+   
+        <script src="/js/aframe.min.js"></script>
+        <script src="/js/spherical-env-map.js"></script>
+        <script src="/js/aframe-extras.js"></script>
+        <script src="/js/aframe-extras.min.js"></script>
+        <script src= "/js/a-ocean.js"></script>
+        <script src= "/js/switch-environment.js"></script>
+        <script src="/js/aframe-particle-system-component.min.js"></script>
+        <script src= "/js/glow.js"></script>
+        <script src = "/js/orb.js"></script>
+      
+
+
+
+
+    </head>
+    <body>
+
+        <a-scene fog="type: exponential; color: #fff8ef; density: 0.002;" shadow="type:basic;" id="AngerRoom">
+                <a-assets timeout="3000">
+                  
+                    <!--textures -->
+                
+                   
+                    <img crossorigin="anonymous" id="skymapPR" src="/assets/Textures/SolaceRoom/Sky.png">
+                    <img id="beachTXT" src="/assets/Textures/SolaceRoom/BeachLayout_TXT.png">
+
+
+                    <a-asset-item id = "beachGround" src="/assets/SolaceRoom Models/ground.obj" ></a-asset-item>
+                    <a-asset-item crossorigin="anonymous" id="AnxietyRoomSound" src="/assets/Sounds/SolaceRoom/Descent.mp3" response-type="arraybuffer"></a-asset-item>
+                    <a-asset-item crossorigin="anonymous" id="WaterSound" src="/assets/Sounds/SolaceRoom/oceanSounds.mp3" response-type="arraybuffer"></a-asset-item>
+
+
+
+
+                </a-assets>
+                <!-- <a-entity id= "leftHand"laser-controls="hand: left" line="color: red; opacity: 0.75" collider-check></a-entity>
+                <a-entity id="rightHand" laser-controls="hand: right" line="color: red; opacity: 0.75" collider-check></a-entity>
+                <a-entity raycaster="objects: .clickable" cursor></a-entity>
+                camera stuff -->
+                <a-entity position="20.7 1.6 22.5  "camera look-controls wasd-controls>
+                    <a-entity  
+                    cursor="fuse:true; fuseTimeout:500;"
+                    rayOrigin:mouse;
+                    position="0 0 -1"
+                    geometry="primitive:ring; radiusInner:0.015; radiusOuter:0.02;"
+                    material="shader:flat; color:white;" >
+                   </a-entity>
+
+               </a-entity>
+               
+               <a-entity position = "0 -15.5 0">
+                    <!--lights-->
+                <a-entity light="type:directional; castShadow:true; intensity:0.2; shadowBias:-0.00001; shadowMapWidth:1024; shadowMapHeight:1024; color:#fbcfae" position="0 28 -301.6"></a-entity>
+                <a-entity light="type:ambient; intensity:0.5; color:#fdf8f0;"></a-entity>
+
+                    <!--stuff loading-->
+               
+
+                
+
+
+
+                
+
+               <!--Environment-->
+                <a-sphere 
+                    solace-orb
+                     glow="enabled:true; scale:1.5; color: #ffdb9b;" 
+                     switch-environment id="orb" 
+                     position="-4.74 13.88 11.87" 
+                     rotation = "0 0 0" 
+                     scale="0.6 0.6 0.6"
+                     material="color:#fcd897; transparent: true; opacity: 0.8; sphericalEnvMap:#skymapPR; roughness:0.7; metalness:0.2;" 
+                     shadow="cast:true; receive:true;">
+                        <a-animation attribute= "scale"
+                            dur = "4000"
+                            from= "0.8 0.8 0.8"
+                            to= " 0.9 0.9 0.9"
+                            direction='alternate'
+                            easing= "ease-in-out-sine"
+                            repeat= "loop:true">
+                         </a-animation>  
+                 </a-sphere>
+                 
+                 <a-entity id="solaceRoom" obj-model="obj:#beachGround" position="0 -6 0" scale="1.0 1.0 1.0" rotation = "-180 0 -180" material="color:#fff; src: #beachTXT; sphericalEnvMap:#skymapPR; roughness:0.8; metalness:0.2;" sound="src:#AnxietyRoomSound; volume:6; autoplay:true; loop:true;" shadow="cast:true; receive:true;"></a-entity>
+
+            <!--WATTEEERRRR-->
+            <a-ocean 
+            sound= "src: #WaterSound; loop:true; autoplay:true; maxDistance: 100; rolloffFactor: 20; volume:10;"
+            id="gardenPond"
+            position = "0.073 -0.18 -67.25"
+            rotation="-88.3 -90 90"
+            scale = "28.03 8.55 1.42"
+            color = "#c4fffa"
+            width = "10"
+            density="30" 
+            depth = "40"
+            >
+            </a-ocean>
+        </a-entity>
+
+
+                    <!--sky-->
+                    <a-entity id="sky" 
+                        geometry = "primitive:sphere; radius: 500;"
+                        material="shader:flat; src:#skymapPR; side:back; height:2048; width:2048" ></a-entity>
+                
+        </a-scene>
+      
+        
+    </body>
+</html>
